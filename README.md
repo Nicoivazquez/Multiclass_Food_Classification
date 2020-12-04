@@ -26,7 +26,7 @@ For testing my models on my local machine, I used np.random.choice to choose 5 f
 
 Then I graphed all the images in order to see what they all looked like:
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Screen_Shot_2020-11-30_at_4.49.18_PM.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Screen_Shot_2020-11-30_at_4.49.18_PM.png)
+![images/Screen_Shot_2020-11-30_at_4.49.18_PM.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Screen_Shot_2020-11-30_at_4.49.18_PM.png)
 
 To many to see clearly so lets grab a random set of 20. 
 
