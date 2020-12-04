@@ -104,13 +104,13 @@ Every multi-class classification problem is different, and so using a cookie-cut
 
 ![images/Untitled%2010.png](images/Untitled%2010.png)
 
-I used a more complicated model with 3 hidden layers with activation function relu and max_pooling to prevent overfitting and lighten training load on GPU, and 2 dropouts at .5 to prevent overtraining, for 67,127,621 trainable parameters. 17,054,021. Loss="categorical_crossentropy" and optimizer was Adam.
+I used a more complicated model with 3 hidden layers with activation function relu and max_pooling to prevent overfitting and lighten training load on GPU, and 2 dropouts at .5 to prevent overtraining, for 17,054,021 trainable parameters. I used for loss in this model Loss="categorical_crossentropy" and for the optimizer was Adam.
 
 ![images/Untitled%2011.png](images/Untitled%2011.png)
 
-Ended up with .2 with this model which is worse than before
+Ended up with .2 validation accuracy with this model which is worse than before.
 
-I decided to lower the Kernal size to 3,3 from 4,4 and I got a bit better accuracy at .21 training and .28 validation. 
+I decided to lower the Kernal size to 3,3 from 4,4 and I got a bit better accuracy validation accuracy at .21 training and .28. 
 
 kernel size is the size of the filter, and the fillers have random weights and the Neural network is going to try to figure out patterns with those filters. 
 
@@ -118,15 +118,15 @@ kernel size is the size of the filter, and the fillers have random weights and t
 
 Changed the drop out rate to .1 since 50% was really high for this model, as I was definitely not overfitting.
 
-- Dropout for all the inputs 50 % means nothing. So I dropped them to .1 and only one towards the end of the model. I started at 50% because I didn't want to overfit like before but different architecture different results.
+  - Dropout for all the inputs 50 % means nothing. So I dropped them to .1 and only one towards the end of the model. I started at 50% because I didn't want to overfit like before but different architecture different results.
 
-Reduced pool_size to pool_size = 4 = 2,2 .
+Reduced pool_size to pool_size = 4 = 2,2
 
-- The max pool size layer used gets the largest pixels from a 4,4 picture, makes the 256 into 64. 16 pixels into 1.
+  - The max pool size layer used gets the largest pixels from a 4,4 picture, makes the 256 into 64. 16 pixels into 1.
 
 Changed the dense neurons to 128 from 32
 
-- The dense neurons are the final step of CNN and are used in transitional NN too. They help put everything together.
+  - The dense neurons are the final step of CNN and are used in transitional NN too. They help put everything together.
 
 Final product looked like this 
 
@@ -136,21 +136,19 @@ Final product looked like this
 
 ![images/Untitled%2015.png](images/Untitled%2015.png)
 
-When I ran a test accuracy score using my hold out data I got:
+When I ran a test accuracy score using my hold-out data I got:
 
-- Test accuracy: 0.478
+  - Test accuracy: 0.478
 
 Not bad but still a little lower than my basic model. 
 
-- Usually adding more hidden layers of neurons generally improves accuracy, to a certain degree in many datasets to a certain limit which can differ depending on the problem. In this case, the Tensor Model is still ahead.
+  - Usually adding more hidden layers of neurons generally improves accuracy, to a certain degree in many datasets to a certain limit which can differ depending on the problem. In this case, the Tensor Model is still ahead.
 
 At this point, I'm thinking what can I push farther to get a better model. Sounds like a problem for Transfer learning to do this I will need a more advanced model, so let's get off my local machine and ssh into some power. 
 
 ## Amazon Web Services Instance
 
-Starting a AWS instance for deep learning and starting up a jupyter notebook in the instance,
-
-scp my images into the AWS instance as a quick and easy way to get my files.
+Starting a AWS instance for deep learning and starting up a jupyter notebook in the instance, scp my images into the AWS instance as a quick and easy way to get my files.
 
 ![images/Untitled%2016.png](images/Untitled%2016.png)
 
@@ -160,7 +158,7 @@ Get my python code into aws using git clone:
 
 Since we can von deeper, lets go all the way to transfer learning.
 
-# **VGG -16**
+# **VGG-16**
 
 I used VGG-16 it is one of the CNN architectures which is considered a very good model for Image classification. This model's architecture was used in the Image(ILSVR) in 2014.
 
@@ -172,7 +170,7 @@ www.geeksforgeeks.com
 
 [https://neurohive.io/en/popular-networks/vgg16/](https://neurohive.io/en/popular-networks/vgg16/)
 
-For transfer learning, I get everything but the softmax layer and the dense layers, so just after the last pooling, also called the head. This is what I will train to fit my model.
+For transfer learning, I get everything but the softmax layer and the dense layers, so just after the last pooling, also called the head. This is what I will train to fit my model. I also had to set a learning rate as to not untrain the model.
 
 ## Setting up the Augmented images for transfer learning
 
@@ -230,9 +228,7 @@ with 101 classes running this basic model was around 20 min per epochs and I tra
 
 ### Set up
 
-Used the same processed image set as before with 70,700 training images.
-
-For the Xception model I decided to go for an more aggressive learning rate of .2 at the start to quicken things up for this model. 
+Used the same processed image set as before with 70,700 training images. For the Xception model I decided to go for an more aggressive learning rate of .2 at the start to quicken things up for this model. 
 
 optimizer = keras.optimizers.SGD(lr=0.2, momentum=0.9, decay=0.01)
 model.compile(loss="categorical_crossentropy", optimizer=optimizer,
@@ -255,7 +251,7 @@ This resulted in a model with 21,068,429 total parameters. with only 206,949 tra
 
 So now that we trained the head lets train the rest of the model. To do this we unfreeze all the layers and run the model again. This time with a much lower learning rate since we don't want to mess up the model previous weights. 
 
-I went with a 0.1 lr. and 0.001 decay. 
+I went with a 0.1 learningrate. and 0.001 decay. 
 
 optimizer = keras.optimizers.SGD(lr=0.1, momentum=0.9, decay=0.001)
 model.compile(loss="categorical_crossentropy", optimizer=optimizer,
@@ -269,7 +265,7 @@ Xception Model Results:
 
 Top1 Accuracy of .7936
 
-Top5 Accuracy of .93969
+Top5 Accuracy of .9396
 
 ![images/Untitled%2028.png](images/Untitled%2028.png)
 
@@ -285,7 +281,7 @@ Tensor Model
 
 Top1 Accuracy = .264
 
-Top5 Accuracy = .55
+Top5 Accuracy = .557
 
 ### Last Model Summary
 
@@ -295,7 +291,7 @@ Xception Model
 
 Top 1 Test Accuracy = .794
 
-Top 5 Test Accuracy = .94 
+Top 5 Test Accuracy = .943
 
 # Predicting
 
@@ -311,15 +307,15 @@ This image most likely belongs to cup cakes with a 2.65 percent confidence. Wron
 
 ![images/Untitled%2032.png](images/Untitled%2032.png)
 
-This image most likely belongs to hummus with a 76.55 percent confidence.Correct!
+This image most likely belongs to hummus with a 96.55 percent confidence.Correct!
 
 ## Final thoughts
 
-So at this point, you might be asking why did my data do best with the basic plug and play model at the beginning with the 5 classes. Well, there are some things to note. First is that some foods might just be very easy for the computer to differentiate others more difficult. The plates of food must have lots of features that are very different. This could have helped the simple model more than the custom model. For many problems, you can begin with a low hidden layer and get decent results.  Just one hidden layer can theoretically model even the most complex functions if it has enough neurons. But for complex problems, deep networks have a much higher parameter efficiency than shallow ones since they can model complex functions using exponentially fewer neurons than shallow simple models, so they are more efficient in a way. They offer more performance.
+So at this point, you might be asking why did my data do best with the basic plug and play model at the beginning with the 5 classes. Well, there are some things to note. First is that some foods might just be very easy for the computer to differentiate others more difficult. The plates of food must have lots of features that are very different. This could have helped the simple model more than the custom model. For many problems, you can begin with a low hidden layer and get decent results. Just one hidden layer can theoretically model even the most complex functions if it has enough neurons. But for complex problems, deep networks have a much higher parameter efficiency than shallow ones since they can model complex functions using exponentially fewer neurons than shallow simple models, so they are more efficient in a way. They offer more performance.
 
 Secondly, the Data augmentation also resulted in a less is better for the models. The less the data is augmented the fewer images the model has to train with and the less generalizable the model, but also if you go too far with data augmentation you can end up with images that are nothing like your test data. 
 
-Thirdly, The pre-trained model with weights from VGG16 did fairly bad and I'm not happy with the results from the Model. The Xception model did Xceptional though and I would definitely work some more on trying to prevent the overfitting to my training and in conjunction with training for more epochs with slowly unfreezing layers, I think it's possible to get to 90% test accuracy. 
+Thirdly, the pre-trained model with weights from VGG16 did fairly bad and I'm not happy with the results from the Model. The Xception model did Xceptional though and I would definitely work some more on trying to prevent the overfitting to my training and in conjunction with training for more epochs with slowly unfreezing layers, I think it's possible to get to 90% test accuracy. 
 
 ## Next steps:
 
