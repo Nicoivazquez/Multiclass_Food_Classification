@@ -26,11 +26,11 @@ For testing my models on my local machine, I used np.random.choice to choose 5 f
 
 Then I graphed all the images in order to see what they all looked like:
 
-![images/Screen_Shot_2020-11-30_at_4.49.18_PM.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Screen_Shot_2020-11-30_at_4.49.18_PM.png)
+![images/Screen_Shot_2020-11-30_at_4.49.18_PM.png](images/Screen_Shot_2020-11-30_at_4.49.18_PM.png)
 
 To many to see clearly so lets grab a random set of 20. 
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Screen_Shot_2020-11-30_at_4.54.47_PM.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Screen_Shot_2020-11-30_at_4.54.47_PM.png)
+![images/Screen_Shot_2020-11-30_at_4.54.47_PM.png](images/Screen_Shot_2020-11-30_at_4.54.47_PM.png)
 
 Much better. Seems like these are pictures of different, angles, locations, resolutions, and even on different plates and in conjunction with other items too. 
 
@@ -48,15 +48,15 @@ One of the most used methods to load data for your model from folders is using t
 
 - Grayscaling
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled.png)
+![images/Untitled.png](images/Untitled.png)
 
 Rotating 90 degrees 
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%201.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%201.png)
+![images/Untitled%201.png](images/Untitled%201.png)
 
 In the end for my model after much tuning I ended up with shear_range=0.2, zoom_range = 0.2, and horizontal_flip. 
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%202.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%202.png)
+![images/Untitled%202.png](images/Untitled%202.png)
 
 So thats alot of aumgentation options we have already, rotation_range=90,height_shift_range=0.5,shear_range=0.2, zoom_range=0.2, horizontal_flip=True, grayscale. But, we also have to remember to re size the image to 256,256 for easy handling in models and then later for transfer learning I use 224,224.
 
@@ -64,7 +64,7 @@ I also normalized the colours using rescale=1./255 in order to optimize for tens
 
 ### Code example:
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%203.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%203.png)
+![images/Untitled%203.png](images/Untitled%203.png)
 
 # Classifying
 
@@ -74,39 +74,39 @@ For basic models, my go-to is the TensorFlow docs. They have good models to get 
 
 model architecture
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%204.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%204.png)
+![images/Untitled%204.png](images/Untitled%204.png)
 
 Trainable parameters : 8,412,965
 
 Let's go ahead and put in our 3,500 training images and 750 validation images for our 5 classes and see our baseline.
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%205.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%205.png)
+![images/Untitled%205.png](Mimages/Untitled%205.png)
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%206.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%206.png)
+![images/Untitled%206.png](images/Untitled%206.png)
 
 pretty good better than guessing which is 20% for 5 classes right. 50% is an okay starting point for our Tensor Model.
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%207.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%207.png)
+![images/Untitled%207.png](images/Untitled%207.png)
 
 Lots of over-fitting, very apparent when training scores get better and better. Depends on what you want false negatives or false positive using precision and recall, but the f1 score is better for my general project of trying to classify food. 
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%208.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%208.png)
+![images/Untitled%208.png](images/Untitled%208.png)
 
 I then ran the basic model with then dropout rate of .2 and then .5 to help with the overfitting that happens with this Tensor Model.
 
 With the dropout rate of 50% being the best with a Test accuracy: 0.5667. 
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%209.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%209.png)
+![images/Untitled%209.png](images/Untitled%209.png)
 
 ## More Complex Custom Model
 
 Every multi-class classification problem is different, and so using a cookie-cutter model like the one above is not always going to grant you the best results ...or is it?
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2010.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2010.png)
+![images/Untitled%2010.png](images/Untitled%2010.png)
 
 I used a more complicated model with 3 hidden layers with activation function relu and max_pooling to prevent overfitting and lighten training load on GPU, and 2 dropouts at .5 to prevent overtraining, for 67,127,621 trainable parameters. 17,054,021. Loss="categorical_crossentropy" and optimizer was Adam.
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2011.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2011.png)
+![images/Untitled%2011.png](images/Untitled%2011.png)
 
 Ended up with .2 with this model which is worse than before
 
@@ -114,7 +114,7 @@ I decided to lower the Kernal size to 3,3 from 4,4 and I got a bit better accura
 
 kernel size is the size of the filter, and the fillers have random weights and the Neural network is going to try to figure out patterns with those filters. 
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2012.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2012.png)
+![images/Untitled%2012.png](images/Untitled%2012.png)
 
 Changed the drop out rate to .1 since 50% was really high for this model, as I was definitely not overfitting.
 
@@ -130,11 +130,11 @@ Changed the dense neurons to 128 from 32
 
 Final product looked like this 
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2013.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2013.png)
+![images/Untitled%2013.png](images/Untitled%2013.png)
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2014.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2014.png)
+![images/Untitled%2014.png](images/Untitled%2014.png)
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2015.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2015.png)
+![images/Untitled%2015.png](images/Untitled%2015.png)
 
 When I ran a test accuracy score using my hold out data I got:
 
@@ -152,11 +152,11 @@ Starting a AWS instance for deep learning and starting up a jupyter notebook in 
 
 scp my images into the AWS instance as a quick and easy way to get my files.
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2016.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2016.png)
+![images/Untitled%2016.png](images/Untitled%2016.png)
 
 Get my python code into aws using git clone:
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2017.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2017.png)
+![images/Untitled%2017.png](images/Untitled%2017.png)
 
 Since we can von deeper, lets go all the way to transfer learning.
 
@@ -164,11 +164,11 @@ Since we can von deeper, lets go all the way to transfer learning.
 
 I used VGG-16 it is one of the CNN architectures which is considered a very good model for Image classification. This model's architecture was used in the Image(ILSVR) in 2014.
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2018.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2018.png)
+![images/Untitled%2018.png](images/Untitled%2018.png)
 
 www.geeksforgeeks.com
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2019.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2019.png)
+![images/Untitled%2019.png](images/Untitled%2019.png)
 
 [https://neurohive.io/en/popular-networks/vgg16/](https://neurohive.io/en/popular-networks/vgg16/)
 
@@ -185,7 +185,7 @@ zoom_range=0.2, # zoom
 horizontal_flip=True, # horizontal flip
 brightness_range=[0.2,1.2]) # brightness)
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2020.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2020.png)
+![images/Untitled%2020.png](images/Untitled%2020.png)
 
 ## Big data set
 
@@ -193,7 +193,7 @@ So far we used three very models to solve our food classifying problem. But we a
 
 Loading the 101 classes onto the VGG16
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2021.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2021.png)
+![images/Untitled%2021.png](images/Untitled%2021.png)
 
 With Transfer learning, it is more important than ever to use a learning rate, as you don't want to quickly untrain the model you can do this by setting a learning rate and a decay.
 
@@ -205,7 +205,7 @@ So how did that model do?
 
 First run with VGG16 with top layer off
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2022.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2022.png)
+![images/Untitled%2022.png](images/Untitled%2022.png)
 
 Not good at around .0126 which is barely better than guessing in this situation. 
 
@@ -215,16 +215,16 @@ While I was setting up the VGG16 model, I had in the background for 10 hours the
 
 with 101 classes running this basic model was around 20 min per epochs and I trained it for 20 epochs and it gave me a test accuracy of 26.86
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2023.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2023.png)
+![images/Untitled%2023.png](images/Untitled%2023.png)
 
 **Top 1 accuracy**
  —Top 1 accuracy means that it guessed the image right. In an image classification problem, you extract the maximum value out of your final softmax outputs.
 
 **Top 5 accuracy** — Top 5 accuracy is when you measure how often your predicted class falls in the top 5 values of your softmax distribution. In our case:
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2024.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2024.png)
+![images/Untitled%2024.png](images/Untitled%2024.png)
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2025.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2025.png)
+![images/Untitled%2025.png](images/Untitled%2025.png)
 
 ## Xception model
 
@@ -249,9 +249,9 @@ For Momentum I went with .9
 
 This resulted in a model with 21,068,429 total parameters. with only 206,949 trainable parameters. 
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2026.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2026.png)
+![images/Untitled%2026.png](images/Untitled%2026.png)
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2027.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2027.png)
+![images/Untitled%2027.png](images/Untitled%2027.png)
 
 So now that we trained the head lets train the rest of the model. To do this we unfreeze all the layers and run the model again. This time with a much lower learning rate since we don't want to mess up the model previous weights. 
 
@@ -271,7 +271,7 @@ Top1 Accuracy of .7936
 
 Top5 Accuracy of .93969
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2028.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2028.png)
+![images/Untitled%2028.png](images/Untitled%2028.png)
 
 Very apparent overfitting in this model visualized perfectly from the growing difference between training and validation accuracy lines. Obvious next step is a drop out layer. 
 
@@ -281,7 +281,7 @@ Very apparent overfitting in this model visualized perfectly from the growing di
 
 Tensor Model
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2029.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2029.png)
+![images/Untitled%2029.png](images/Untitled%2029.png)
 
 Top1 Accuracy = .264
 
@@ -291,7 +291,7 @@ Top5 Accuracy = .55
 
 Xception Model
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2030.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2030.png)
+![images/Untitled%2030.png](images/Untitled%2030.png)
 
 Top 1 Test Accuracy = .794
 
@@ -303,13 +303,13 @@ Now we are in a place to predict.
 
 [https://images1.miaminewtimes.com/imager/u/745xauto/11655890/sushi-erika-miami-credit-fujifilmgirl-24.jpg](https://images1.miaminewtimes.com/imager/u/745xauto/11655890/sushi-erika-miami-credit-fujifilmgirl-24.jpg)
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2031.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2031.png)
+![images/Untitled%2031.png](images/Untitled%2031.png)
 
 This image most likely belongs to cup cakes with a 2.65 percent confidence.
 
 [https://thekitchengirl.com/wp-content/uploads/Homemade-Hummus-2.jpg](https://thekitchengirl.com/wp-content/uploads/Homemade-Hummus-2.jpg)
 
-![Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2032.png](Multi-class%20Food%20Classification%2017e7015928574119a5b13de8cc92fc85/Untitled%2032.png)
+![images/Untitled%2032.png](images/Untitled%2032.png)
 
 This image most likely belongs to hummus with a 76.55 percent confidence.
 
