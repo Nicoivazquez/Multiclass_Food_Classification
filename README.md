@@ -80,7 +80,7 @@ Trainable parameters : 8,412,965
 
 Let's go ahead and put in our 3,500 training images and 750 validation images for our 5 classes and see our baseline.
 
-![images/Untitled%205.png](Mimages/Untitled%205.png)
+![images/Untitled%205.png](images/Untitled%205.png)
 
 ![images/Untitled%206.png](images/Untitled%206.png)
 
