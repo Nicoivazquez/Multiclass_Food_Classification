@@ -1,5 +1,7 @@
 # Multi-class Food Classification
 
+## Start With Why?
+Ever since college I've been obsesed with food. It all began when I started volonteering at a local organic farm durring my free time in college. After college I moved to Urugay for a year and started the first organic farm the area. Since I have pivoted into Data Science I still enjoy working on food problems. Whether, it is using data to help ghost kitchens in thier business decisions or a image classifer to classify food on plates like this one. Nothing gets the jucies going like projects like this. Hope you enjoy!
 ## Data
 
 This data set has 101 categories of data and 1,000 images for each category totaling 101,000 images in total. Found here 
