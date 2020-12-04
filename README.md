@@ -305,13 +305,13 @@ Now we are in a place to predict.
 
 ![images/Untitled%2031.png](images/Untitled%2031.png)
 
-This image most likely belongs to cup cakes with a 2.65 percent confidence.
+This image most likely belongs to cup cakes with a 2.65 percent confidence. Wrong! It's sushi.
 
 [https://thekitchengirl.com/wp-content/uploads/Homemade-Hummus-2.jpg](https://thekitchengirl.com/wp-content/uploads/Homemade-Hummus-2.jpg)
 
 ![images/Untitled%2032.png](images/Untitled%2032.png)
 
-This image most likely belongs to hummus with a 76.55 percent confidence.
+This image most likely belongs to hummus with a 76.55 percent confidence.Correct!
 
 ## Final thoughts
 
