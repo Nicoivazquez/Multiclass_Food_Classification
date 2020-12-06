@@ -112,7 +112,7 @@ I used a more complicated model with 3 hidden layers with activation function re
 
 Ended up with .2 validation accuracy with this model which is worse than before.
 
-I decided to lower the Kernal size to 3,3 from 4,4 and I got a bit better accuracy validation accuracy at .21 training and .28. 
+I decided to lower the Kernal size to 3,3 from 4,4 and I got a bit better accuracy validation accuracy .28 validation set. 
 
 kernel size is the size of the filter, and the fillers have random weights and the Neural network is going to try to figure out patterns with those filters. 
 
@@ -213,7 +213,7 @@ Not good at around .0126 which is barely better than guessing in this situation.
 
 While I was setting up the VGG16 model, I had in the background for 10 hours the Tensor model on the full data set and here are the results.
 
-with 101 classes running this basic model was around 20 min per epochs and I trained it for 20 epochs and it gave me a test accuracy of 26.86
+With 101 classes running this basic model was around 20 min per epochs and I trained it for 20 epochs and it gave me a test accuracy of 26.86
 
 ![images/Untitled%2023.png](images/Untitled%2023.png)
 
