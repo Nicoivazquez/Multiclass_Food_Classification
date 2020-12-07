@@ -321,7 +321,7 @@ Thirdly, the pre-trained model with weights from VGG16 did fairly bad and I'm no
 
 ## Next steps:
 
-Simple next steps would be to use a grid search to find optimal hyper perimeters. Doing grid takes a long time but will give you the optimal hyperparameters. The ones I am most interested in is batch size and data augmentation. 
+Simple next steps would be to use a grid search to find optimal hyper perimeters. Doing grid search takes a long time but will give you the optimal hyperparameters. The ones I am most interested in is batch size and data augmentation. 
 
 With more time, taking this project a step further would include getting deeper with transfer learning and re-training the model layers to fit my data set more. You can do this by freezing layers slowly rather than all at once as I did. 
 
